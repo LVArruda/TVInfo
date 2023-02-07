@@ -35,7 +35,7 @@ The solution has two types of tests, unit tests and integration tests. Unit test
 ## Shortcomings - points that could be improved
 
 - Logs
-- Test Coverage
+- Test Coverage, specially on worker logic
 - Exception handling
 - Health checks
 - Database optimization. Some queries and possibly a fine tuning on its server. Perhaps move to a different database technology

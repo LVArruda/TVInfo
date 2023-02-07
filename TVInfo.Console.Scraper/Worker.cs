@@ -47,7 +47,7 @@ namespace TVInfo.Console.Scraper
                     _logger.LogInformation($"Updated shows: {string.Join(",", shows.Select(s => s.Id))}");
                 }                
             }
-            while (shows.Count != 0 || !stoppingToken.IsCancellationRequested);
+            while (!(shows.Count == 0 || stoppingToken.IsCancellationRequested));
         }
     }
 }

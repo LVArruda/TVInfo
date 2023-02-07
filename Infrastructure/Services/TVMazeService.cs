@@ -29,7 +29,7 @@ namespace Infrastructure.Services
             await AddCastData(tvShows, tvShowsToAdd);
 
             return tvShows;
-        }       
+        }
 
         private async Task AddCastData(List<TVShow> tvShows, IEnumerable<TVShow>? tvShowsToAdd)
         {
@@ -37,9 +37,12 @@ namespace Infrastructure.Services
             {
                 var castResult = await _httpClient.GetAsync($"/shows/{tvShow.Id}/cast");
 
-                var cast = await Deserialize<IEnumerable<TVMazeCastDTO>>(castResult);
+                if (castResult.IsSuccessStatusCode)
+                {
+                    var cast = await Deserialize<IEnumerable<TVMazeCastDTO>>(castResult);
 
-                tvShow.Cast = cast.Select(c => new CastMember() { Birthday = c.Person.Birthday is not null ? DateTime.Parse(c.Person.Birthday) : null, Id = c.Person.Id, Name = c.Person.Name });
+                    tvShow.Cast = cast.Select(c => new CastMember() { Birthday = c.Person.Birthday is not null ? DateTime.Parse(c.Person.Birthday) : null, Id = c.Person.Id, Name = c.Person.Name });
+                }
             }
 
             tvShows.AddRange(tvShowsToAdd);

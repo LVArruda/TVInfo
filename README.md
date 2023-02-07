@@ -14,7 +14,7 @@ To accomplish this, the solution has two applications inside:
 This was created with the intention to have a MVP working and running for a while, to have something that domain and tech can lean on and build from there. For cases that I have more time and the business have more rules I recommend making use of DDD and Clean Architecture. That is the architecture that I have plenty experience, both on strategic and tactical design. 
 
 ## Requirements
-- .Net 7 installed
+- .Net 6 installed
 - Docker installed
 
 ## How to run

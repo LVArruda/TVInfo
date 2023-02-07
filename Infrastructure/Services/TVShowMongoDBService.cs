@@ -15,7 +15,7 @@ namespace Infrastructure.Services
             _mongoDBService = mongoDBService;
         }
 
-        public async Task<List<TVShow>> GetAsync(int page)
+        public async Task<IEnumerable<TVShow>> GetAsync(int page)
         {
             return await _mongoDBService.GetAsync(page);
         }

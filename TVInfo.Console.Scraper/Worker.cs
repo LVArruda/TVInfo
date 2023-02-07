@@ -34,14 +34,18 @@ namespace TVInfo.Console.Scraper
             {
                 Stopwatch sw = Stopwatch.StartNew();
                 shows = (await _tvMazeService.GetTVshowsPerPage(page)).ToList();
-                _logger.LogInformation($"*** Time elapsed getting from TVMaze API: {sw.Elapsed}");
-                page++;
 
-                sw.Restart();
-                await _tvShowMongoDBService.UpdateManyAsync(shows);
-                _logger.LogInformation($"*** Time elapsed to store: {sw.Elapsed}");
+                if (shows.Count > 0)
+                {
+                    _logger.LogInformation($"*** Time elapsed getting from TVMaze API: {sw.Elapsed}");
+                    page++;
 
-                _logger.LogInformation($"Updated shows: {string.Join(",", shows.Select(s => s.Id))}");
+                    sw.Restart();
+                    await _tvShowMongoDBService.UpdateManyAsync(shows);
+                    _logger.LogInformation($"*** Time elapsed to store: {sw.Elapsed}");
+
+                    _logger.LogInformation($"Updated shows: {string.Join(",", shows.Select(s => s.Id))}");
+                }                
             }
             while (shows.Count != 0 || !stoppingToken.IsCancellationRequested);
         }

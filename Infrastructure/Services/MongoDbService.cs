@@ -18,7 +18,7 @@ namespace Infrastructure.Services
             _tvShowCollection = database.GetCollection<TVShow>(mongoDBSettings.Value.TvShowCollectionName);
         }
 
-        public async Task<List<TVShow>> GetAsync(int page)
+        public async Task<IEnumerable<TVShow>> GetAsync(int page)
         {
             var pageSize = 50;
 
